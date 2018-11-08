@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top">
+<nav class="nav navbar navbar-expand-md navbar-light navbar-fixed-top navbar-right">
     <div class="container-fluid">
         <!--<div class="container">-->
         <div class="myLogo navbar-brand">
@@ -9,18 +9,18 @@
                 </div>
             </a>
         </div>
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#myNavbarDropdown"
-                aria-controls="myNavbarDropdown"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#myNavbarDropdown"
+            aria-controls="myNavbarDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="navbar-collapse collapse" id="myNavbarDropdown">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto nav">
                 <li class="nav-item">
                     <a class="nav-link" href="/shop">SHOP</a>
                 </li>
@@ -33,11 +33,10 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropbtn">
-                        MANAGE
-                        <span class="caret"></span>
+                        MANAGE <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                     <ul class="dropdown-content">
-                        <li>
+                        <li >
                             <a class="dropdown-a" href="/souvenirs">Souvenir</a>
                         </li>
                         <li>
@@ -51,7 +50,42 @@
 
             </ul>
 
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav navbar-right">
+                <!-- Authentication Links -->
+            @if (Auth::guest())
+                <li  class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                </li>
+                <li  class="nav-item">
+                    <a  class="nav-link" href="{{ route('register') }}">Register</a>
+                </li>
+                @else
+                <li class="nav-item">
+                    <a class="nav-link" href="#" role="button">
+                        {{ Auth::user()->name }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                    class="nav-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                    <form
+                        id="logout-form"
+                        action="{{ route('logout') }}"
+                        method="POST"
+                        style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </li>
+            </ul>
+
+            @endif
+
         </div>
-        <!-- </div> -->
+
     </div>
 </nav>

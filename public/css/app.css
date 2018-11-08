@@ -113,6 +113,8 @@ img {
 
 /*navbar*/
 nav {
+    max-width: 1200px;
+    width:100%;
     z-index: 1;
     background-color: white;
     top: 0 !important;

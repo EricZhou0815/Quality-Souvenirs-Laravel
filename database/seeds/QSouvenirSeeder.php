@@ -11,6 +11,14 @@ class QSouvenirSeeder extends Seeder
      */
     public function run()
     {
+        //init user
+        $users=[
+            ['name'=>'admin','email'=>'admin@Qualitysouvenirs.com','password'=>bcrypt('P@ssw0rd'),'type'=>'admin'],
+        ];
+        DB::table('users')->insert($users);
+
+
+
         //init data
         $categories=[
             ['name'=>'Maori Gifts'],

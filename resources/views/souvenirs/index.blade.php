@@ -3,9 +3,6 @@
 @section('content')
 
 <h2>Index</h2>
-@if (Session::has('message'))
-<div class="alert alert-info">{{ Session::get('message') }}</div>
-@endif
 <p>
     <a href="/souvenirs/create">Create New</a>
 </p>
