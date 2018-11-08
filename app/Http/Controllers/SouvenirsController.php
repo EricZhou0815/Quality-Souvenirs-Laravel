@@ -102,6 +102,21 @@ class SouvenirsController extends Controller
         return view('souvenirs.show')->with('souvenir', $souvenir);
     }
 
+        /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function display($id)
+    {
+        //go to find souvenir to display single product for user
+        $souvenir = Souvenir::find($id);
+        return view('souvenirs.display')->with('souvenir', $souvenir);
+    }
+
+
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -24,6 +24,7 @@ Route::get('/contact', function () {
 });
 
 Route::get('/shop', 'SouvenirsController@shop');
+Route::get('/souvenirs/display/{id}', 'SouvenirsController@display');
 
 Route::resource('souvenirs','SouvenirsController');
 

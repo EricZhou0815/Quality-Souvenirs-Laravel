@@ -1,4 +1,5 @@
-<nav class="nav navbar navbar-expand-md navbar-light navbar-fixed-top navbar-right">
+<nav
+    class="nav navbar navbar-expand-md navbar-light navbar-fixed-top navbar-right">
     <div class="container-fluid">
         <!--<div class="container">-->
         <div class="myLogo navbar-brand">
@@ -30,10 +31,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">CONTACT</a>
                 </li>
-
+                @if (Auth::check() && Auth::user()->type == "admin")
                 <li class="nav-item dropdown">
                     <a class="nav-link dropbtn">
-                        MANAGE <span class="glyphicon glyphicon-chevron-down"></span>
+                        MANAGE
+                        <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                     <ul class="dropdown-content">
                         <li >
@@ -45,22 +47,34 @@
                         <li>
                             <a class="dropdown-a" href="/categories">Category</a>
                         </li>
+                        <li>
+                            <a class="dropdown-a" href="/categories">Member</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-a" href="/categories">Order</a>
+                        </li>
                     </ul>
                 </li>
+
+                @endif
 
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav navbar-right">
                 <!-- Authentication Links -->
-            @if (Auth::guest())
-                <li  class="nav-item">
+                @if (Auth::guest())
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Login</a>
                 </li>
-                <li  class="nav-item">
-                    <a  class="nav-link" href="{{ route('register') }}">Register</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
                 </li>
-                @else
+                @endif @if (Auth::check()) @if (Auth::user()->type == "default")
+                <li class="nav-item">
+                    <a class="nav-link" href="">My Order</a>
+                </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="#" role="button">
                         {{ Auth::user()->name }}
@@ -68,7 +82,8 @@
                 </li>
                 <li class="nav-item">
                     <a
-                    class="nav-link" href="{{ route('logout') }}"
+                        class="nav-link"
+                        href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                         Logout
@@ -81,9 +96,8 @@
                         {{ csrf_field() }}
                     </form>
                 </li>
+                @endif
             </ul>
-
-            @endif
 
         </div>
 
