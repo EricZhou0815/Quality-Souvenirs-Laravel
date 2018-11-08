@@ -1,0 +1,58 @@
+﻿@model QualitySouvenirs.Models.Souvenir
+
+@{
+    ViewData["Title"] = "Details";
+    var imgUrl = @Href("~/images/Souvenirs/" + @Model.PathOfImage);
+    var errImage = @Href("~/images/kiwibird.jpeg");
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Souvenir</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            Image
+            <!--Html.DisplayNameFor(model => model.PathOfImage)-->
+        </dt>
+        <dd>
+            <img style="height:100px;width:auto;" src="@imgUrl" alt="Souvenir Image" onerror="this.onerror = null; this.src='@errImage'" />
+           <!--Html.DisplayFor(model => model.PathOfImage)-->
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SupplierName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

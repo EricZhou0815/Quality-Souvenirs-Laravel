@@ -1,0 +1,112 @@
+﻿@model QualitySouvenirs.Models.ShoppingCartViewModels.ShoppingCartViewModel
+
+@{
+    ViewData["Title"] = "Default";
+    var theCount = 0;
+}
+
+@foreach(var item in Model.CartItems)
+{
+    theCount++;
+}
+
+@if (theCount > 0)
+{
+
+    <div class="theShoppingCart">
+        <h2><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <span id="theCount">@theCount</span><span id="taggleShoppingCart" class="glyphicon glyphicon-chevron-down" type="button" onclick="taggleShoppingCart()"></span></h2>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <h4 class="display-4">Souvenir ID</h4>
+                </div>
+                <div class="col-sm-2">
+                    <h4 class="display-4">Souvenir Name</h4>
+                </div>
+                <div class="col-sm-2">
+                    <h4 class="display-4">Description</h4>
+                </div>
+                <div class="col-sm-2">
+                    <h4 class="display-4">Quantity</h4>
+                </div>
+                <div class="col-sm-2">
+                    <h4 class="display-4">Price</h4>
+                </div>
+            </div>
+
+            @foreach (var item in Model.CartItems)
+            {
+
+
+                <div class="row">
+                    <div class="col-sm-2">@item.Souvenir.ID</div>
+                    <div class="col-sm-2"><a asp-action="ShopItemDetails" asp-controller="Souvenirs" asp-route-id="@item.Souvenir.ID">@item.Souvenir.Name</a> </div>
+                    <div class="col-sm-2">$@item.Souvenir.Description</div>
+
+                    <div class="col-sm-2">
+                        <a asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-id="@item.Souvenir.ID" class="glyphicon glyphicon-plus"></a>
+                        @item.Count
+                        <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.Souvenir.ID" class="glyphicon glyphicon-minus"></a>
+                    </div>
+
+                    <div class="col-sm-2">$@item.Souvenir.Price</div>
+                </div>
+            }
+
+            @{
+                string GST = (Model.CartTotal * (decimal)0.15).ToString("N2");
+                string GrandTotal = (Model.CartTotal * (decimal)1.15).ToString("N2");
+            }
+
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2">Subtotal:</div>
+
+                <div class="col-sm-2">$@Model.CartTotal</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2">GST(15%):</div>
+
+                <div class="col-sm-2">$@GST</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2">Grand Total:</div>
+
+                <div class="col-sm-2">$@GrandTotal</div>
+            </div>
+
+            @if (@Model.CartItems.Count > 0)
+            {
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-offset-4">
+                        <a asp-action="EmptyCart" asp-controller="ShoppingCart" class="btn btn-danger">
+                            Clear Cart <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+
+                        <a asp-action="Create" asp-controller="Orders" class="btn btn-info">
+                            Checkout <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+    </div>
+                }
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

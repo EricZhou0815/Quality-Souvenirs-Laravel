@@ -1,0 +1,50 @@
+﻿@model QualitySouvenirs.Models.Souvenir
+
+@{
+    ViewData["Title"] = "ShopItemDetails";
+    var imgUrl = @Href("~/images/Souvenirs/" + @Model.PathOfImage);
+    var errImage = @Href("~/images/kiwibird.jpeg");
+
+}
+
+<h2>ShopItemDetails</h2>
+
+<div>
+    <h4>Souvenir</h4>
+    <hr />
+
+    <div class="shopItemDetails container-fluid cartDetailsContainer col-lg-12 col-md-12 col-sm-12">
+        <div class="row itemTitle">
+            <div class="row col-lg-12 col-md-12 col-sm-12 cartDetailsHead">
+                <span class="cartItemName">@Model.Name</span>
+                <span class="cartItemPrice">$@Model.Price</span>
+                <span class="buttonGroup">
+                    <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.ID" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        Add to Cart
+                    </a>
+                    <a asp-controller="Souvenirs" asp-action="Shop" class="btn btn-info">
+                        Back
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </a>
+                </span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 cartItemImageContainer">
+                <img class="cartItemImage" style="position:relative;height:auto;width:80%;overflow:cover;" src="@imgUrl" alt="Souvenir" onerror="this.onerror = null; this.src='@errImage'">
+            </div>
+            <div class="row col-lg-12 col-md-12 col-sm-12">
+                <h5 class="itemDescription">
+                    @Html.DisplayFor(model => model.Description)
+                </h5>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

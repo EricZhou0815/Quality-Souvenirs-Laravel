@@ -1,0 +1,82 @@
+﻿@model IEnumerable<QualitySouvenirs.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               OrderID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Date
+            </th>
+
+            <th>
+                Subtotal
+            </th>
+            <th>
+                GST
+            </th>
+            <th>
+                Grand Total
+            </th>
+            <th>
+                Order Status
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @item.OrderId
+                </td>
+                <td>
+                    @item.FirstName @item.LastName
+                </td>
+                <td>
+                    @item.Phone
+                </td>
+                <td>
+                    @item.Address, @item.City, @item.State,@item.Country,@item.PostalCode
+                </td>
+                <td>
+                    @item.OrderDate
+                </td>
+
+                <td>
+                    $@item.Total
+                </td>
+                <td>
+                    $@item.GST
+                </td>
+                <td>
+                    $@item.GrandTotal
+                </td>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.OrderId">Details</a>
+                </td>
+            </tr>
+}
+    </tbody>
+</table>

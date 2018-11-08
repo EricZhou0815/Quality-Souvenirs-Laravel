@@ -1,0 +1,108 @@
+﻿@model List<QualitySouvenirs.Models.Souvenir>
+
+@{
+    ViewData["Title"] = "Quality Souvenir";
+    var column = 3;
+    List<Souvenir> Products = new List<Souvenir>();
+    foreach (var item in Model)
+    {
+        Products.Add(item);
+    }
+    var count = Model.Count;
+    int row = count / column;
+    int reminder = count % column;
+}
+
+<div class="place-holder"></div>
+
+
+<div class="theContent">
+    <div class="atTheTop">
+        <div class="theSearchBar">
+            <form asp-controller="Souvenirs" asp-action="Shop" method="get">
+                <div class="form-actions no-color">
+                    <p>
+                        <input type="text" class="form-control searchBar sb-one" name="searchString" value="@ViewData["searchProducts"]" placeholder="Search" />
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <div class="souvenirFiltersContainer">
+            <ul class="souvenirFilters">
+                <li style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../images/maorigifts.png);">
+                    <a asp-controller="Souvenirs" asp-action="Shop" asp-route-searchString="Maori Gifts">Maori Gifts</a>
+                </li>
+                <li style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../images/cup.png);">
+                    <a asp-controller="Souvenirs" asp-action="Shop" asp-route-searchString="Mugs">Mugs</a>
+                </li>
+                <li style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../images/t-shirt.png);">
+                    <a asp-controller="Souvenirs" asp-action="Shop" asp-route-searchString="T-Shirts">T-Shirts</a>
+                </li>
+                <li style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../images/hat.png);">
+                    <a asp-controller="Souvenirs" asp-action="Shop" asp-route-searchString="Hats">Hats</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="masonryContainer">
+        <div class="masonry">
+
+            @for (int i = 0; i < column + 1; i++)
+            {
+                for (int j = 0; j < row; j++)
+                {
+                    var imgUrl = @Href("~/images/Souvenirs/" + Model[i + j * column].PathOfImage);
+                    var errImage = @Href("~/images/kiwibird.jpeg");
+
+
+
+                    <div class="item prodcutCardContainer">
+                        <div class="productCard">
+                            <div class="prodcutImageContianer">
+                                <img class="productImage" src="@imgUrl" alt="Souvenir" onerror="this.onerror = null; this.src='@errImage'" />
+                            </div>
+                            <table class="productRow">
+                                <tr class="ProductTextRowOne">
+                                    <td>
+                                        <span class="productName">@Model[i + j * column].Name</span>
+                                        <span class="productPrice">$@Model[i + j * column].Price</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <a asp-controller="Souvenirs" asp-action="ShopItemDetails" asp-route-id="@Model[i+j*column].ID" class="btn btn-info">Details</a>
+                                        <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model[i+j*column].ID" class="btn btn-success">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                            Add to Cart
+                                        </a>
+                                        <!--
+                                          <button id="Model[i+j*column].ID" onclick="AddToCart(event)" class="btn btn-success">
+                                              <span  class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                              Add to Cart (Ajax)
+                                          </button>-->
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+
+                    count--;
+                    if (count < 1)
+                    {
+                        break;
+                    }
+                }
+
+            }
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

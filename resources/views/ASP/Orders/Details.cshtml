@@ -1,0 +1,91 @@
+﻿@model QualitySouvenirs.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+    
+}
+
+@inject UserManager<ApplicationUser> UserManager
+
+<div>
+    <h4>The following is the order details.</h4>
+    <hr />
+
+            <table class="table">
+                <tr>
+                    <th>Souvenir ID</th>
+                    <th>Souvenir Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+                 @foreach (var item in Model.OrderDetails)
+                {
+                            
+                var imgUrl = @Href("~/images/Souvenirs/" + item.Souvenir.PathOfImage);
+                var errImage = @Href("~/images/kiwibird.jpeg");
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.Description)
+                        </td>
+                        <td>
+                            <img style="height:100px;width:auto;" src="@imgUrl" alt="Souvenir Image" onerror="this.onerror = null; this.src='@errImage'" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.Price)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <label>Subtotal:</label>
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => Model.Total)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <label>GST(15%):</label>
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => Model.GST)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <label>Grand Total:</label>
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => Model.GrandTotal)
+                    </td>
+                </tr>
+            </table>
+
+    <div>
+        <a asp-action="MemberIndex"  asp-route-id="@UserManager.GetUserId(User)" class="btn btn-info">Back</a>
+    </div>
+</div>
+

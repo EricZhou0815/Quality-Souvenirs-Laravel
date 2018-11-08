@@ -1,0 +1,143 @@
+﻿@model QualitySouvenirs.Models.Order
+
+@{
+    ViewData["Title"] = "Purchased";
+}
+
+<h2><span class="glyphicon glyphicon-saved"></span>Thank you For Your Purchase!</h2>
+
+<div>
+    <h4>The following order will be dispatched as per the details below.</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.User.Email)</dt>
+        <dd>@Html.DisplayFor(model => model.User.Email)</dd>
+
+        <dt>
+            Name
+        </dt>
+        <dd>
+           @Model.FirstName @Model.LastName
+        </dd>
+        <dt>
+           Address
+        </dt>
+        <dd>
+            @Model.Address, @Model.City, @Model.State, @Model.Country,@Model.PostalCode
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GrandTotal)
+        </dt>
+        <dd>
+            $@Html.DisplayFor(model => model.GrandTotal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Souvenir ID</th>
+                    <th>Souvenir Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+                @foreach (var item in Model.OrderDetails)
+                {
+
+                    var imgUrl = @Href("~/images/Souvenirs/" + item.Souvenir.PathOfImage);
+                    var errImage = @Href("~/images/kiwibird.jpeg");
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.Description)
+                        </td>
+                        <td>
+                            <img style="height:100px;width:auto;" src="@imgUrl" alt="Souvenir Image" onerror="this.onerror = null; this.src='@errImage'" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Souvenir.Price)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <label>Subtotal:</label>
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => Model.Total)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <label>GST(15%):</label>
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => Model.GST)
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <label>Grand Total:</label>
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => Model.GrandTotal)
+                    </td>
+                </tr>
+            </table>
+
+        </dd>
+
+
+    </dl>
+
+@inject UserManager<ApplicationUser> UserManager
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-offset-4">
+
+            <a asp-action="Shop" asp-controller="Souvenirs" class="btn btn-info">
+                Continue Shopping <span class="glyphicon glyphicon-shopping-cart"></span>
+            </a>
+        </div>
+    </div>
+</div>
+
