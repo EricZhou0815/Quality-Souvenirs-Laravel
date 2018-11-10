@@ -23,6 +23,9 @@
         <div class="navbar-collapse collapse" id="myNavbarDropdown">
             <ul class="navbar-nav ml-auto nav">
                 <li class="nav-item">
+                    <a class="nav-link" href="/">HOME</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/shop">SHOP</a>
                 </li>
                 <li class="nav-item">
@@ -31,10 +34,27 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">CONTACT</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=""><i class="fas fa-shopping-cart"></i> <span id="cartItemCount">2</span></a>
+                </li>
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav navbar-right">
+                <!-- Authentication Links -->
+                @if (Auth::guest())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                </li>
+                @endif 
+
                 @if (Auth::check() && Auth::user()->type == "admin")
                 <li class="nav-item dropdown">
                     <a class="nav-link dropbtn">
-                        MANAGE
+                            {{ Auth::user()->name }} <span class="caret"></span>
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </a>
                     <ul class="dropdown-content">
@@ -55,31 +75,26 @@
                         </li>
                     </ul>
                 </li>
-
                 @endif
 
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                @if (Auth::guest())
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Register</a>
-                </li>
-                @endif @if (Auth::check()) @if (Auth::user()->type == "default")
-                <li class="nav-item">
-                    <a class="nav-link" href="">My Order</a>
+                @if (Auth::check())
+                @if (Auth::user()->type == "default")
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropbtn">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul class="dropdown-content">
+                            <li >
+                                <a class="dropdown-a" href="/souvenirs">Account</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-a" href="/suppliers">Order</a>
+                            </li>
+                        </ul>
                 </li>
                 @endif
-                <li class="nav-item">
-                    <a class="nav-link" href="#" role="button">
-                        {{ Auth::user()->name }}
-                    </a>
-                </li>
+                
                 <li class="nav-item">
                     <a
                         class="nav-link"

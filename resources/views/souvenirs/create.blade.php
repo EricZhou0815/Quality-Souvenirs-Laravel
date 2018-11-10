@@ -26,17 +26,17 @@
             </div>
             <div class="form-group">
                 <label for="supplier" class="control-label">Supplier</label>
-                <select type="text" name="supplierName" class="form-control">
+                <select type="text" name="supplier_id" class="form-control">
                 @foreach ($suppliers as $value)
-                    <option value="{{$value->name}}">{{$value->name}}</option>
+                    <option value="{{$value->id}}">{{$value->name}}</option>
                 @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="category" class="control-label">Category</label>
-                <select type="text" name="categoryName" class="form-control">
+                <select type="text" name="category_id" class="form-control">
                     @foreach ($categories as $value)
-                        <option value="{{$value->name}}">{{$value->name}}</option>
+                        <option value="{{$value->id}}">{{$value->name}}</option>
                     @endforeach
                 </select>
             </div>

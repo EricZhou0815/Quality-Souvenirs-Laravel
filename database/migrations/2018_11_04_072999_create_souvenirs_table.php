@@ -13,6 +13,8 @@ class CreateSouvenirsTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
+
         Schema::create('souvenirs', function (Blueprint $table) {
             $table->increments('id');
 
@@ -20,12 +22,19 @@ class CreateSouvenirsTable extends Migration
             $table->string('description');
             $table->decimal('price');
             $table->string('pathOfImage');
-            $table->string('categoryName');
-            $table->string('supplierName');
-        
+            //$table->string('categoryName');
+            //$table->string('supplierName');
+            //set foreign key to suppliers table
+            $table->integer('supplier_id')->unsigned()->nullable();
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
+            //set foreign key to categories table
+            $table->integer('category_id')->unsigned()->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             
             $table->timestamps();
         });
+
+        
     }
 
     /**

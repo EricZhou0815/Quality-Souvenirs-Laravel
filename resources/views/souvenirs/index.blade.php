@@ -63,10 +63,10 @@
                 <img style="height:100px;width:auto;" src="{{asset('images/Souvenirs/'.$value->pathOfImage)}}" alt="Souvenir Image" />
             </td>
             <td>
-                {{$value->supplierName}}
+                {{$value->supplier()->first()->name}}
             </td>
             <td>
-                {{$value->categoryName}}
+                {{$value->category()->first()->name}}
             </td>
             <td>
                 <a href="/souvenirs/{{$value->id}}">Details</a>

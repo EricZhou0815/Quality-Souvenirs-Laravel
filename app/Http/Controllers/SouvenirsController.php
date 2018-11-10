@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SouvenirsController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +22,20 @@ class SouvenirsController extends Controller
     {
         //get all the souvenirs for product admin page
         $souvenirs=Souvenir::orderBy('id')->paginate(10);
+        $categories=Category::all();
+        $suppliers=Supplier::all();
 
         //load the view and pass the souvenirs
-        return View('souvenirs.index')->with('souvenirs',$souvenirs);
+        return View('souvenirs.index')->with(['souvenirs'=>$souvenirs,'categories'=>$categories,'suppliers'=>$suppliers]);
+    }
+
+    public function filterByCategory($id)
+    {   
+        $souvenirs=DB::table('souvenirs')
+                   ->select(DB::raw('*'))
+                   ->where('category_id','=',$id)
+                   ->get();
+    return View('souvenirs.shop')->with('souvenirs',$souvenirs);
     }
 
     public function shop()
@@ -33,6 +45,18 @@ class SouvenirsController extends Controller
 
         //load the view and pass the souvenirs
         return View('souvenirs.shop')->with('souvenirs',$souvenirs);
+    }
+
+
+    public function search(Request $request){
+        $string=$request->SearchString;
+        
+        $souvenirs=DB::table('souvenirs')
+                   ->select(DB::raw('*'))
+                   ->where('name','LIKE','%'.$string.'%')
+                   ->orWhere('price','LIKE','%'.$string.'%')
+                   ->get();
+        return View('souvenirs.shop')->with('souvenirs',$souvenirs);  
     }
 
     /**
@@ -62,8 +86,8 @@ class SouvenirsController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'supplierName'=>'required',
-            'categoryName'=>'required'
+            'supplier_id'=>'required',
+            'category_id'=>'required'
         ]);
 
         // Handle File Upload
@@ -79,8 +103,8 @@ class SouvenirsController extends Controller
         $souvenir->name=$request->input('name');
         $souvenir->description=$request->input('description');
         $souvenir->price=$request->input('price');
-        $souvenir->supplierName=$request->input('supplierName');
-        $souvenir->categoryName=$request->input('categoryName');
+        $souvenir->supplier_id=$request->input('supplier_id');
+        $souvenir->category_id=$request->input('category_id');
         $souvenir->pathOfImage = $fileNameToStore;
         $souvenir->save();
 
@@ -147,6 +171,8 @@ class SouvenirsController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
+            'supplier_id'=>'required',
+            'category_id'=>'required',
         ]);
 
 
@@ -155,8 +181,8 @@ class SouvenirsController extends Controller
         $souvenir->name=$request->input('name');
         $souvenir->description=$request->input('description');
         $souvenir->price=$request->input('price');
-        $souvenir->supplierName=$request->input('supplierName');
-        $souvenir->categoryName=$request->input('categoryName');
+        $souvenir->supplier_id=$request->input('supplier_id');
+        $souvenir->category_id=$request->input('category_id');
 
         // Handle image File Upload
         if($request->hasFile('imageUpload')){

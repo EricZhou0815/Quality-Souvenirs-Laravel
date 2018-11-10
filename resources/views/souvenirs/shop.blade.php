@@ -9,16 +9,15 @@
     //$reminder = $count % $column;
 @endphp
 
-<div class="place-holder"></div>
-
 
 <div class="theContent">
     <div class="atTheTop">
         <div class="theSearchBar">
-            <form action="SouvenirsController@shop" method="GET">
+            <form action="/souvenirs/search" method="GET" enctype='multipart/form-data'>
+                {{ csrf_field() }}
                 <div class="form-actions no-color">
                     <p>
-                        <input type="text" class="form-control searchBar sb-one" name="searchString" value="" placeholder="Search" />
+                        <input type="text" class="form-control searchBar sb-one" name="SearchString" value="" placeholder="Search souvenirs by names or prices" />
                     </p>
                 </div>
             </form>
@@ -27,16 +26,16 @@
         <div class="souvenirFiltersContainer">
             <ul class="souvenirFilters">
                 <li style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../images/maorigifts.png);">
-                    <a action="SouvenirsController@shop" method="GET" searchString="Maori Gifts">Maori Gifts</a>
+                    <a href='/souvenirs/filterByCategory/1'>Maori Gifts</a>
                 </li>
                 <li style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../images/cup.png);">
-                    <a action="SouvenirsController@shop" method="GET" searchString="Mugs">Mugs</a>
+                    <a href='/souvenirs/filterByCategory/2'>Mugs</a>
                 </li>
                 <li style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../images/t-shirt.png);">
-                    <a action="SouvenirsController@shop" method="GET" searchString="T-Shirts">T-Shirts</a>
+                    <a href='/souvenirs/filterByCategory/3'>T-Shirts</a>
                 </li>
                 <li style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(../images/hat.png);">
-                    <a action="SouvenirsController@shop" method="GET" searchString="Hats">Hats</a>
+                    <a href='/souvenirs/filterByCategory/4'>Hats</a>
                 </li>
             </ul>
         </div>
@@ -72,11 +71,11 @@
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                             Add to Cart
                                         </a>
-                                        <!--
-                                          <button id="Model[i+j*column].ID" onclick="AddToCart(event)" class="btn btn-success">
+                                        
+                                          <button id="{{$item->id}}}" onclick="AddToCart(event)" class="btn btn-success">
                                               <span  class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                               Add to Cart (Ajax)
-                                          </button>-->
+                                          </button>
                                     </td>
                                 </tr>
 
@@ -87,14 +86,12 @@
                     //$count--;
                     @endphp
 
-                
-                
-
             @endforeach
 
         </div>
     </div>
 </div>
+
 
 
 @endsection

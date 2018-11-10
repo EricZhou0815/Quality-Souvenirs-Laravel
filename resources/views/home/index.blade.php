@@ -3,14 +3,15 @@
 @section('content') 
 
 <div>
-    <div class="place-holder"></div>
+    
 
     <div class="hero-image hero-one">
         <div class="hero-text">
             <div class="myTittle">Quality Souvenirs</div>
             <h4>Bring New Zealand to your home.</h4>
 
-            <form action='SouvenirsController@store', method='GET', enctype='multipart/form-data'>
+            <form action='/souvenirs/search' method='GET' enctype='multipart/form-data'>
+                {{ csrf_field() }}
                 <div class="form-actions no-color">
                     <p>
                         <input

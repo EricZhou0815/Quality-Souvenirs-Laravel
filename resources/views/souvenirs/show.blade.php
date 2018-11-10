@@ -38,13 +38,13 @@
             Supplier
         </dt>
         <dd>
-                {{$souvenir->supplierName}}
+                {{$souvenir->supplier()->first()->name}}
         </dd>
         <dt>
             Category
         </dt>
         <dd>
-                {{$souvenir->categoryName}}
+                {{$souvenir->category()->first()->name}}
         </dd>
     </dl>
 </div>

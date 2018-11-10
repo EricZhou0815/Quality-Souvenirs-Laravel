@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf_token" content="{ csrf_token() }" />
+        <meta name="csrf_token" content="{{ csrf_token() }}" />
 
         <title>Quality Souvenirs</title>
 
@@ -23,6 +23,8 @@
             integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
             crossorigin="anonymous">
 
+        <link rel="shortcut icon" href="{{ asset('favicon.png') }}">    
+
         <!-- Optional theme -->
 
         <!-- Styles -->
@@ -33,9 +35,11 @@
         <div id="app">
             @include('shared/navigation')
             <div class="mainContent">
-                    @if (Session::has('message'))
+                <div class="place-holder"></div>
+                @if (Session::has('message'))
                     <div class="alert alert-info">{{ Session::get('message') }}</div>
-                    @endif
+                @endif
+                
                 @yield('content')
             </div>
             @include('shared/footer')
@@ -46,6 +50,7 @@
         
         <!-- Latest compiled and minified JavaScript -->
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/myScript.js') }}"></script>
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

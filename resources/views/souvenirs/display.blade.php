@@ -18,7 +18,7 @@
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         Add to Cart
                     </a>
-                    <a class="btn btn-info">
+                    <a href="/shop" class="btn btn-info">
                         Back
                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                     </a>
@@ -29,7 +29,7 @@
             </div>
             <div class="row col-lg-12 col-md-12 col-sm-12">
                 <h5 class="itemDescription">
-                    {{$souvenir->description}}}
+                    {{$souvenir->description}}
                 </h5>
             </div>
 
