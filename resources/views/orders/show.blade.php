@@ -14,28 +14,28 @@
                         <th>Description</th>
                         <th>Image</th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Cost</th>
                     </tr>
                      @foreach ($orderDetails as $orderDetail)
       
                         <tr>
                             <td>
-                                {@Html.DisplayFor(modelItem => item.Souvenir.ID)}
+                                {{$orderDetail->souvenir_id}}
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Souvenir.Name)
+                                    {{$orderDetail->souvenir->name}}
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Souvenir.Description)
+                                    {{$orderDetail->souvenir->description}}
                             </td>
                             <td>
-                                <img style="height:100px;width:auto;" src="@imgUrl" alt="Souvenir Image" onerror="this.onerror = null; this.src='@errImage'" />
+                                    <img style="height:100px;width:auto;" src="{{asset('images/Souvenirs/'.$orderDetail->souvenir->pathOfImage)}}" alt="Souvenir Image"  />
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Quantity)
+                                    {{$orderDetail->quantity}}
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Souvenir.Price)
+                                    {{$orderDetail->price}}
                             </td>
                         </tr>
                     @endforeach
@@ -78,7 +78,7 @@
                 </table>
     
         <div>
-            <a asp-action="MemberIndex"  asp-route-id="@UserManager.GetUserId(User)" class="btn btn-info">Back</a>
+            <a href="/orders" class="btn btn-info">Back</a>
         </div>
     </div>
 

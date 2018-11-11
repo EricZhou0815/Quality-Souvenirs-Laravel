@@ -1,8 +1,6 @@
-﻿@model QualitySouvenirs.Models.Order
+@extends('shared/layout') 
 
-@{
-    ViewData["Title"] = "Purchased";
-}
+@section('content')
 
 <h2><span class="glyphicon glyphicon-saved"></span>Thank you For Your Purchase!</h2>
 
@@ -10,44 +8,44 @@
     <h4>The following order will be dispatched as per the details below.</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.User.Email)</dt>
-        <dd>@Html.DisplayFor(model => model.User.Email)</dd>
+        <dt>Email</dt>
+        <dd>{{Auth::user()->email}}</dd>
 
         <dt>
             Name
         </dt>
         <dd>
-           @Model.FirstName @Model.LastName
+           {{$order->firstName}} {{$order->lastName}}
         </dd>
         <dt>
            Address
         </dt>
         <dd>
-            @Model.Address, @Model.City, @Model.State, @Model.Country,@Model.PostalCode
+            {{$order->address}},{{$order->city}},{{$order->state}},{{$order->postalCode}}
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Phone)
+            Phone
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Phone)
+                {{$order->phone}}
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.GrandTotal)
+               Total Cost
         </dt>
         <dd>
-            $@Html.DisplayFor(model => model.GrandTotal)
+                {{$order->grandTotal}}
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.OrderDate)
+                Order Date
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.OrderDate)
+                {{$order->created_at}}
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            Status
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Status)
+                {{$order->status}}
         </dd>
         <dd>
             <table class="table">
@@ -59,32 +57,32 @@
                     <th>Quantity</th>
                     <th>Price</th>
                 </tr>
-                @foreach (var item in Model.OrderDetails)
-                {
+                @foreach ($orderDetails as $orderDetail)
+                @php
+                    $souvenir=$orderDetail->souvenir;
+                @endphp
 
-                    var imgUrl = @Href("~/images/Souvenirs/" + item.Souvenir.PathOfImage);
-                    var errImage = @Href("~/images/kiwibird.jpeg");
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Souvenir.ID)
+                        {{$orderDetail->souvenir->id}}
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Souvenir.Name)
+                        {{$orderDetail->souvenir->name}}
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Souvenir.Description)
+                            {{$orderDetail->souvenir->description}}
                         </td>
                         <td>
-                            <img style="height:100px;width:auto;" src="@imgUrl" alt="Souvenir Image" onerror="this.onerror = null; this.src='@errImage'" />
+                            <img style="height:100px;width:auto;" src="{{asset('images/Souvenirs/'.$orderDetail->souvenir->pathOfImage)}}" alt="Souvenir Image" />
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)
+                            {{$orderDetail->quantity}}
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Souvenir.Price)
+                        ${{/*$orderDetail->souvenir()->price*/ $souvenir->price}}
                         </td>
                     </tr>
-                }
+                @endforeach
                 <tr>
                     <td></td>
                     <td></td>
@@ -94,7 +92,7 @@
                         <label>Subtotal:</label>
                     </td>
                     <td>
-                        $@Html.DisplayFor(modelItem => Model.Total)
+                        ${{$order->total}}
                     </td>
                 </tr>
                 <tr>
@@ -106,7 +104,7 @@
                         <label>GST(15%):</label>
                     </td>
                     <td>
-                        $@Html.DisplayFor(modelItem => Model.GST)
+                        ${{$order->gst}}
                     </td>
                 </tr>
                 <tr>
@@ -118,7 +116,7 @@
                         <label>Grand Total:</label>
                     </td>
                     <td>
-                        $@Html.DisplayFor(modelItem => Model.GrandTotal)
+                        ${{$order->grandTotal}}
                     </td>
                 </tr>
             </table>
@@ -128,16 +126,17 @@
 
     </dl>
 
-@inject UserManager<ApplicationUser> UserManager
     <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
         <div class="col-sm-offset-4">
 
-            <a asp-action="Shop" asp-controller="Souvenirs" class="btn btn-info">
+            <a href="/shop" class="btn btn-info">
                 Continue Shopping <span class="glyphicon glyphicon-shopping-cart"></span>
             </a>
         </div>
     </div>
 </div>
+
+@endsection
 

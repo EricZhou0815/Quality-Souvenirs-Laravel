@@ -66,16 +66,12 @@
 
                                 <tr>
                                     <td>
-                                        <a href="/souvenirs/display/{{{$item->id}}}" id="{{$item->id}}" class="btn btn-info">Details</a>
-                                        <a href="" id="{{$item->id}}" class="btn btn-success">
+                                        <a href="/souvenirs/display/{{$item->id}}" id="{{$item->id}}" class="btn btn-info">Details</a>
+                                        <a href="/souvenirs/addToCart/{{$item->id}}" id="{{$item->id}}" class="btn btn-success">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                             Add to Cart
                                         </a>
                                         
-                                          <button id="{{$item->id}}}" onclick="AddToCart(event)" class="btn btn-success">
-                                              <span  class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                              Add to Cart (Ajax)
-                                          </button>
                                     </td>
                                 </tr>
 

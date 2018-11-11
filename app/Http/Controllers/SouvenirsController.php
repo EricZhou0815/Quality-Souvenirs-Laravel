@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Souvenir;
 use App\Category;
 use App\Supplier;
+use App\ShoppingCart;
 use DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -57,6 +58,21 @@ class SouvenirsController extends Controller
                    ->orWhere('price','LIKE','%'.$string.'%')
                    ->get();
         return View('souvenirs.shop')->with('souvenirs',$souvenirs);  
+    }
+
+    public function searchIndex(Request $request){
+        $string=$request->SearchString;
+        
+        $souvenirs=Souvenir::where('name','LIKE','%'.$string.'%')
+                   ->orWhere('price','LIKE','%'.$string.'%')
+                   ->paginate(10);
+
+                   //$souvenirs=DB::table('souvenirs')
+                  // ->select(DB::raw('*'))
+                  // ->where('name','LIKE','%'.$string.'%')
+                  // ->orWhere('price','LIKE','%'.$string.'%')
+                  // ->paginate(10);           
+        return View('souvenirs.index')->with('souvenirs',$souvenirs);  
     }
 
     /**
@@ -214,5 +230,64 @@ class SouvenirsController extends Controller
         //redirect to categories.index
         Session::flash('message', 'Successfully deleted souvenir!');
         return Redirect('/souvenirs');
+    }
+
+    public function addToCart(Request $request, $id)
+    {
+        $souvenir=Souvenir::find($id);
+        $oldCart=Session::has('cart')?Session::get('cart'):null;
+        $cart=new ShoppingCart($oldCart);
+        $cart->add($souvenir,$souvenir->id);
+        
+        $request->session()->put('cart',$cart);
+
+        //dd($request->session()->get('cart'));
+        return Redirect ('/shop');
+    }
+
+    public function getCart(){
+        $oldCart=Session::get('cart');
+        $cart=new ShoppingCart($oldCart);
+        return View('/souvenirs/shoppingCart')->with(['cartItems'=>$cart->items,'totalPrice'=>$cart->totalPrice]);
+    }
+
+    public function addCartItem(Request $request, $id)
+    {
+        $souvenir=Souvenir::find($id);
+        $oldCart=Session::has('cart')?Session::get('cart'):null;
+        $cart=new ShoppingCart($oldCart);
+        $cart->add($souvenir,$souvenir->id);
+        
+        $request->session()->put('cart',$cart);
+
+        $oldCart=Session::get('cart');
+        $cart=new ShoppingCart($oldCart);
+
+        //dd($request->session()->get('cart'));
+        return Redirect ('/souvenirs/getCart')->with(['cartItems'=>$cart->items,'totalPrice'=>$cart->totalPrice]);
+
+    }
+
+    public function minusCartItem(Request $request, $id)
+    {
+        $souvenir=Souvenir::find($id);
+        $oldCart=Session::has('cart')?Session::get('cart'):null;
+        $cart=new ShoppingCart($oldCart);
+        $cart->minus($souvenir,$souvenir->id);
+        
+        $request->session()->put('cart',$cart);
+
+        $oldCart=Session::get('cart');
+        //dd($request->session()->get('cart'));
+        return Redirect ('/souvenirs/getCart')->with(['cartItems'=>$cart->items,'totalPrice'=>$cart->totalPrice]);
+    }
+
+    public function clearCart(){
+        $oldCart=Session::has('cart')?Session::get('cart'):null;
+        $cart=new ShoppingCart($oldCart);
+        $cart->clear();
+
+        return Redirect ('/souvenirs/getCart');
+
     }
 }

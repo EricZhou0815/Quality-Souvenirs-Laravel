@@ -34,7 +34,6 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($users as $user)
             <tr>
                 <td>
                     {{$user->id}}
@@ -55,10 +54,9 @@
                     {{$user->created_at}}
                 </td>
                 <td>
-                    <a href="/users/{{$user->id}}/changeStatus">{{$user->enabled}}</a>
+                    {{$user->enabled}}
                 </td>
             </tr>
-        @endforeach
     </tbody>
 </table>
 

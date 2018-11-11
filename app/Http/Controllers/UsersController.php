@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -13,20 +15,28 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users=User::where()->orderBy('id')->simplePaginate(10);
+        $users=DB::table('users')
+                    ->select(DB::raw('*'))
+                    ->where('id','!=',1)
+                    ->get();
 
         return View('users.index')->with('users',$users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function changeStatus($id){
+        $user=User::find($id);
+        if($user->enabled=='enabled'){
+            $user->enabled='disabled';
+        }
+        elseif($user->enabled=='disabled'){
+            $user->enabled='enabled';
+        }
+        $user->save();
+    
+        return Redirect('users');
+
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -47,7 +57,8 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user=User::find($id);
+        return view('users.show')->with('user',$user);
     }
 
     /**

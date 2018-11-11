@@ -37,7 +37,9 @@
                 Order Status
             </th>
 
-            <th></th>
+            <th>
+                More
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -53,10 +55,10 @@
                     {{$order->phone}}
                 </td>
                 <td>
-                    {{$order->address." ".$order->city." ".$order->state." ".$order->country." ".$order->postalCode}}
+                    {{$order->address." ".$order->city." ".$order->state." ".$order->postalCode}}
                 </td>
                 <td>
-                    {{$order->orderDate}}
+                    {{$order->created_at}}
                 </td>
 
                 <td>
@@ -66,18 +68,21 @@
                     ${{$order->gst}}
                 </td>
                 <td>
-                    ${{$order->subTotal}}
+                    ${{$order->grandTotal}}
                 </td>
                 <td>
+                    @if (Auth::user()->type=='admin')
+                    <a href="/orders/{{$order->id}}/orderStatus">{{$order->status}}</a>
+                    @else
                     {{$order->status}}
+                    @endif
                 </td>
                 <td>
-                    <a href="orders/show/{{$order->id}}">Details</a>
+                    <a href="/orders/{{$order->id}}">Details</a>
                 </td>
             </tr>
         @endforeach
     </tbody>
-    {{ $orders->links() }}
 </table>
 
 @endsection

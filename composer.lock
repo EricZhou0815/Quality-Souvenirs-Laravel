@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2eb6eae3f4fbceab2042f935010a1a7c",
+    "content-hash": "5c0df71754c5bbac9c50a63f647eab85",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -451,6 +451,54 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "juliobitencourt/laravel-cart",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/juliobitencourt/laravel-cart.git",
+                "reference": "46c6687efa789700a3fb4335dfb5718b7f963ab7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/juliobitencourt/laravel-cart/zipball/46c6687efa789700a3fb4335dfb5718b7f963ab7",
+                "reference": "46c6687efa789700a3fb4335dfb5718b7f963ab7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5.0|~5.1@dev",
+                "illuminate/session": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JulioBitencourt\\Cart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Julio Bitencourt",
+                    "email": "julio@contagia.com.br",
+                    "homepage": "http://www.contagia.com.br",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A lightweight PHP Shopping Cart for Laravel 5.",
+            "homepage": "http://github.com/juliobitencourt/laravel-cart",
+            "keywords": [
+                "cart",
+                "laravel"
+            ],
+            "time": "2015-10-10T17:39:43+00:00"
         },
         {
             "name": "laravel/framework",

@@ -5,6 +5,15 @@
 
 <h4>Souvenir</h4>
 <hr />
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="row">
     <div class="col-md-4">
         <form action="/souvenirs" method="post" enctype="multipart/form-data">

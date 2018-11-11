@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             //make user/admin 
             $table->string('type')->default('default');
             $table->string('name');
-            $table->boolean('enabled')->default(true);
+            $table->string('enabled')->default('enabled');
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('email')->unique();

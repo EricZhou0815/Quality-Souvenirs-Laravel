@@ -35,7 +35,7 @@
                     <a class="nav-link" href="/contact">CONTACT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href=""><i class="fas fa-shopping-cart"></i> <span id="cartItemCount">2</span></a>
+                    <a class="nav-link" href="/souvenirs/getCart"><i class="fas fa-shopping-cart"></i> <span class="badge" id="cartItemCount">{{Session::has('cart')?Session::get('cart')->totalQuantity:''}}</span></a>
                 </li>
             </ul>
 
@@ -68,10 +68,10 @@
                             <a class="dropdown-a" href="/categories">Category</a>
                         </li>
                         <li>
-                            <a class="dropdown-a" href="/categories">Member</a>
+                            <a class="dropdown-a" href="/users">Member</a>
                         </li>
                         <li>
-                            <a class="dropdown-a" href="/categories">Order</a>
+                            <a class="dropdown-a" href="/orders">Order</a>
                         </li>
                     </ul>
                 </li>
@@ -86,10 +86,10 @@
                         </a>
                         <ul class="dropdown-content">
                             <li >
-                                <a class="dropdown-a" href="/souvenirs">Account</a>
+                                <a class="dropdown-a" href="/users/{{Auth::user()->id}}">Account</a>
                             </li>
                             <li>
-                                <a class="dropdown-a" href="/suppliers">Order</a>
+                                <a class="dropdown-a" href="/orders">Order</a>
                             </li>
                         </ul>
                 </li>

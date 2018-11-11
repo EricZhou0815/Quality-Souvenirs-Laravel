@@ -1,7 +1,17 @@
-@extends('shared/layout') @section('content')
+@extends('shared/layout') 
+@section('content')
 
 <h4>Create Supplier</h4>
 <hr/>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="row">
     <div class="col-md-4">
         <form action="/suppliers" method="post">

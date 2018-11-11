@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use JulioBitencourt\Cart\Cart;
 use App\CartItem;
 
 class ShoppingCartsController extends Controller
 {
+    protected $cart;
+
+	public function __construct(Cart $cart)
+	{
+		$this->cart = $cart;
+	}
     /**
      * Display a listing of the resource.
      *
@@ -88,48 +95,33 @@ class ShoppingCartsController extends Controller
 
     public function addToCart($id)
     {
-        $shoppingCart=ShoppingCart::all();
-       
-        if(!$shoppingCart){
-            //Create shoppingcart
-            $shoppingCart=new ShoppingCart;
-            $shoppingCart->id='1';
-            $shoppingCart->save();
-        }
-        else {
-            $cartItem=DB::table('cartItems')
-            ->select(DB::raw('*'))
-            ->where('souvenir_id','=',$id)
-            ->get(); 
-            if(!$cartItem)
-            {
-                $cartItem=new CartItem;
-                $cartItem->souvenir_id=$id;
-                $cartItem->shoppingCart_id='1';
-                $cartItem->count='1';
-                $cartItem->save();
-            }
-            else{
-                $cartItem->count++;
-                $cartItem->save();
-            }
-        }
-        $cartItems=DB::table('cartItems')
-        ->select(DB::raw('*'))
-        ->where('shoppingCart_id','=','1')
-        ->get(); 
-        return Response::json($cartItems->toArray());
+        $souvenir=Souvenir::find($id);
+        $item=[
+            'sku'=>$souvenir->id,
+            'description'=>$souvenir->name,
+            'price'=>$souvenir->price,
+            'quantity'=>1
+        ];
+
+        $result=$this->cart->insert($item);
+        return Response::json($this->$cart->totalItems()->toArray());
     }
 
     public function addItem($id)
     {
-        $cartItem=CartItem::find($id);
-        $cartItem->count++;
-        $cartItem->save();
-        return Response::json($cartItem->count->toArray());
+        $souvenir=Souvenir::find($id);
+        $item=[
+            'sku'=>$souvenir->id,
+            'description'=>$souvenir->name,
+            'price'=>$souvenir->price,
+            'quantity'=>1
+        ];
+
+        $result=$this->cart->insert($item);
+        return Response::json($this->$cart->totalItems()->toArray());
     }
 
-    public function minusItem()
+    public function minusItem($id)
     {
         $cartItem=CartItem::find($id);
         $cartItem->count--;

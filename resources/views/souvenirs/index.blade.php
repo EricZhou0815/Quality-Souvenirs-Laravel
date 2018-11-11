@@ -6,7 +6,8 @@
 <p>
     <a href="/souvenirs/create">Create New</a>
 </p>
-<form asp-action="Index" method="get">
+<form action="/souvenirs/searchIndex" method="GET" enctype='multipart/form-data'>
+        {{ csrf_field() }}
     <div class="form-actions no-color">
         <p>
             Find souvenir by keyword:
@@ -63,10 +64,10 @@
                 <img style="height:100px;width:auto;" src="{{asset('images/Souvenirs/'.$value->pathOfImage)}}" alt="Souvenir Image" />
             </td>
             <td>
-                {{$value->supplier()->first()->name}}
+                {{$value->supplier->name}}
             </td>
             <td>
-                {{$value->category()->first()->name}}
+                {{$value->category->name}}
             </td>
             <td>
                 <a href="/souvenirs/{{$value->id}}">Details</a>

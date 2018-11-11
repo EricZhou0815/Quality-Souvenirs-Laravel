@@ -2,56 +2,57 @@
 
 @section('content')
 
-@php
- $theCount = 0;
- $theCount=$cartItems->count();
-@endphp
 
-@if ($theCount > 0)
+
+@if (Session::has('cart'))
 
 
     <div class="theShoppingCart">
-        <h2><span class="glyphicon glyphicon glyphicon-shopping-cart"></span> <span id="theCount">{{$theCount}}</span><span id="taggleShoppingCart" class="glyphicon glyphicon-chevron-down" type="button" onclick="taggleShoppingCart()"></span></h2>
+        
 
 
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
-                    <h4 class="display-4">Souvenir ID</h4>
+                    <div class="display-6">Souvenir ID</div>
                 </div>
                 <div class="col-sm-2">
-                    <h4 class="display-4">Souvenir Name</h4>
+                    <div class="display-6">Souvenir Name</div>
                 </div>
                 <div class="col-sm-2">
-                    <h4 class="display-4">Description</h4>
+                        <div class="display-6">Image</div>
+                    </div>
+                <div class="col-sm-2">
+                    <div class="display-6">Description</div>
                 </div>
                 <div class="col-sm-2">
-                    <h4 class="display-4">Quantity</h4>
+                    <div class="display-6">Quantity</div>
                 </div>
                 <div class="col-sm-2">
-                    <h4 class="display-4">Price</h4>
+                    <div class="display-6">Price</div>
                 </div>
             </div>
 
             @foreach ($cartItems as $cartItem)
                 <div class="row">
-                    <div class="col-sm-2">{{$cartItem->souvenir()->first()->id}}</div>
-                    <div class="col-sm-2"><a>{{$cartItem->souvenir()->first()->name}}</a> </div>
-                    <div class="col-sm-2">{{$cartItem->souvenir()->first()->description}}</div>
+                    <div class="col-sm-2">{{$cartItem['souvenir']->id}}</div>
+                    <div class="col-sm-2"><a>{{$cartItem['souvenir']->name}}</a> </div>
+                    <div class="col-sm-2"><img style="height:100px;width:auto;" src="{{asset('images/Souvenirs/'.$cartItem['souvenir']->pathOfImage)}}" alt="Souvenir Image" /> </div>
+                    <div class="col-sm-2">{{$cartItem['souvenir']->description}}</div>
 
                     <div class="col-sm-2">
-                        <a class="glyphicon glyphicon-plus"></a>
-                        {{$cartItem->count}}
-                        <a class="glyphicon glyphicon-minus"></a>
+                        <a href="/souvenirs/addCartItem/{{$cartItem['souvenir']->id}}"><i class="fas fa-plus-circle"></i></a>
+                        {{$cartItem['count']}}
+                        <a href="/souvenirs/minusCartItem/{{$cartItem['souvenir']->id}}"><i class="fas fa-minus-circle"></i></a>
                     </div>
 
-                    <div class="col-sm-2">${{$cartItem->souvenir()->first()->price}}</div>
+                    <div class="col-sm-2">${{$cartItem['price']}}</div>
                 </div>
             @endforeach
 
             @php
-                $gst = $total * 0.15;
-                $grandTotal = $total*1.15;
+                $gst = $totalPrice * 0.15;
+                $grandTotal = $totalPrice*1.15;
             @endphp
 
             <div class="row">
@@ -60,7 +61,7 @@
                 <div class="col-sm-2"></div>
                 <div class="col-sm-2">Subtotal:</div>
 
-                <div class="col-sm-2">$ {{$total}}</div>
+                <div class="col-sm-2">$ {{$totalPrice}}</div>
             </div>
             <div class="row">
                 <div class="col-sm-2"></div>
@@ -79,26 +80,27 @@
                 <div class="col-sm-2">${{$grandTotal}}</div>
             </div>
 
-            @if ($CartItems->count > 0)
+           
             
                 <div class="row">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-2"></div>
                     <div class="col-sm-offset-4">
-                        <a class="btn btn-danger">
+                        <a href="/souvenirs/clearCart" class="btn btn-danger">
                             Clear Cart <span class="glyphicon glyphicon-remove"></span>
                         </a>
 
-                        <a class="btn btn-info">
+                        <a href="/orders/create" class="btn btn-info">
                             Checkout <span class="glyphicon glyphicon-chevron-right"></span>
                         </a>
                     </div>
                 </div>
 
-            @endif
 
         </div>
     </div>
+@else
+<div>you havent add any souvenirs yet.</div>
 @endif
 
 

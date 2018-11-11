@@ -20,4 +20,8 @@ class Souvenir extends Model
         public function supplier(){
             return $this->belongsTo('App\Supplier');
         }
+
+        public function OrderDetails(){
+            return $this->hasMany('App\OrderDetail');
+        }
 }

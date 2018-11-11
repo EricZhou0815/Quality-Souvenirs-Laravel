@@ -13,6 +13,7 @@ class CreateOrderDetailsTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('orderDetails', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('quantity');
