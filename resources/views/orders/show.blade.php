@@ -14,7 +14,7 @@
                         <th>Description</th>
                         <th>Image</th>
                         <th>Quantity</th>
-                        <th>Cost</th>
+                        <th>Price</th>
                     </tr>
                      @foreach ($orderDetails as $orderDetail)
       
@@ -35,7 +35,7 @@
                                     {{$orderDetail->quantity}}
                             </td>
                             <td>
-                                    {{$orderDetail->price}}
+                                    ${{$orderDetail->souvenir->price}}
                             </td>
                         </tr>
                     @endforeach

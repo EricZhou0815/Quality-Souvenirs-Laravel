@@ -29,10 +29,7 @@
     <div class="exploreGoods">Most people Love</div>
     <div class=" container row">
         <div class="myCardBox col col-lg-3 col-md-4 col-sm-6 col-xs-12">
-            <a
-                class="containerCard"
-                action='SouvneirsController@store' method='GET'
-                searchString="cup">
+            <a class="containerCard" href='/souvenirs/filterByCategory/2'>
                 <div class="cardImageContainer">
                     <img class="cardImage" src="{{url('/images/cups.jpg')}}"/>
                     <div class="cardText">Mugs</div>
@@ -40,10 +37,7 @@
             </a>
         </div>
         <div class="myCardBox col col-lg-3 col-md-4 col-sm-6">
-            <a
-                class="containerCard"
-                action='SouvneirsController@store' method='GET'
-                searchString="gift">
+            <a class="containerCard" href='/souvenirs/filterByCategory/1'>
                 <div class="cardImageContainer">
                     <img class="cardImage" src="{{url('/images/gifts.jpg')}}"/>
                     <div class="cardText">Maori Gifts</div>
@@ -51,10 +45,7 @@
             </a>
         </div>
         <div class="myCardBox col col-lg-3 col-md-4 col-sm-6">
-            <a
-                class="containerCard"
-                action='SouvenirsController@store' method='GET'
-                asp-route-searchString="t-shirt">
+            <a class="containerCard" href='/souvenirs/filterByCategory/3'>
                 <div class="cardImageContainer">
                     <img class="cardImage" src="{{url('/images/t-shirts.jpg')}}"/>
                     <div class="cardText">T-Shirts</div>
@@ -62,10 +53,7 @@
             </a>
         </div>
         <div class="myCardBox col col-lg-3 col-md-4 col-sm-6">
-            <a
-                class="containerCard"
-                action='SouvenirsController@store' method='GET'
-                asp-route-searchString="hat">
+            <a class="containerCard" href='/souvenirs/filterByCategory/2'>
                 <div class="cardImageContainer">
                     <img class="cardImage" src="{{url('/images/hats.jpg')}}"/>
                     <div class="cardText">Hats</div>

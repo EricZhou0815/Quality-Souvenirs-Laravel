@@ -121,11 +121,14 @@ class OrdersController extends Controller
         //dd($cart);
         foreach ($cart->items as $item)
         {
+            if($item['count']>0)
+            {
             $orderDetail=new orderDetail;
             $orderDetail->order_id=$order->id;
             $orderDetail->souvenir_id=$item['souvenir']->id;
             $orderDetail->quantity=$item['count'];
             $orderDetail->save();
+            }
         }
         
         

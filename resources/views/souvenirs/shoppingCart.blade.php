@@ -34,6 +34,7 @@
             </div>
 
             @foreach ($cartItems as $cartItem)
+            @if($cartItem['count']>0)
                 <div class="row">
                     <div class="col-sm-2">{{$cartItem['souvenir']->id}}</div>
                     <div class="col-sm-2"><a>{{$cartItem['souvenir']->name}}</a> </div>
@@ -48,6 +49,7 @@
 
                     <div class="col-sm-2">${{$cartItem['price']}}</div>
                 </div>
+            @endif
             @endforeach
 
             @php

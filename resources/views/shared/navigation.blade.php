@@ -34,9 +34,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">CONTACT</a>
                 </li>
+                @if(Session::has('cart'))
                 <li class="nav-item">
                     <a class="nav-link" href="/souvenirs/getCart"><i class="fas fa-shopping-cart"></i> <span class="badge" id="cartItemCount">{{Session::has('cart')?Session::get('cart')->totalQuantity:''}}</span></a>
                 </li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->

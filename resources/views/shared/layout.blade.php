@@ -63,5 +63,7 @@
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzrlil3_8_riKGrFUdVnUP__d6J9bLNp8&callback=initMap"
+    async defer></script>
     </body>
 </html>

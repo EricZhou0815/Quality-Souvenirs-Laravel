@@ -4,6 +4,7 @@ namespace App;
 use App\cartItem;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Session\Store;
 
 class ShoppingCart
 {
@@ -44,19 +45,25 @@ class ShoppingCart
         $cart = Session::get('cart');
         $storedItem=$this->items[$id];
         $storedItem['count']--;
-        if($storedItem['count']==0)
-        {
-            unset($cart->items[$id]);
-            Session::put('cart', $cart);
-        }
-        else
-        {
-        $storedItem['price']=$item->price*$storedItem['count'];
         $this->items[$id]=$storedItem;
         $this->totalQuantity--;
         $this->totalPrice+=$item->price;
-        //Session::put('cart', $cart);
+        if($storedItem['count']==0)
+        {
+            
+            //session()->forget('cart'.items[$id]);
+            unset($cart->items[$id]);
+            Session::put('cart', $cart);
+            //dd($cart);
         }
+        //else
+        //{
+        //$storedItem['price']=$item->price*$storedItem['count'];
+        //$this->items[$id]=$storedItem;
+        //$this->totalQuantity--;
+        //$this->totalPrice+=$item->price;
+        //Session::put('cart', $cart);
+        //}
     }
 
     public function clear(){
