@@ -9,6 +9,25 @@ Home Page:
 Product Page:
 ![product](doc/QS.png)
 
+# Features
+
+- PHP Laravel
+
+- MySQL Docker Image
+
+# Functionalities
+
+- User Registeration / login (email, password)
+
+- Administrator login (email:'admin@Qsouvenri.com',passwrod:'P@ssw0rd')
+
+- Product Search
+
+- Order Placement / Shopping Cart
+
+- Catalog Administration (manage product, category, supplier, order)
+
+
 # How to
 
 The project uses MySQL docker as database for development. To view the full functionality, it is recommended to install MySQL docker image: mysql-57-centos7.
