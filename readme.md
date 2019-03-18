@@ -1,7 +1,7 @@
 
 # Quality-Souvenirs-Laravel
 
-An e-commerce website developed with PHP Laravel
+An e-commerce website with waterfall style developed with PHP Laravel
 
 Home Page:
 ![homepage](doc/QualitySouvenirs.png)
