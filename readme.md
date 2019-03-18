@@ -19,7 +19,7 @@ Product Page:
 
 - User Registeration / login (email, password)
 
-- Administrator login (email:'admin@Qsouvenri.com',passwrod:'P@ssw0rd')
+- Administrator login (email:'admin@Qualitysouvenirs.com', passwrod:'P@ssw0rd')
 
 - Product Search
 
