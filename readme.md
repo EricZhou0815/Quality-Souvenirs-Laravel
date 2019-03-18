@@ -1,7 +1,13 @@
 
 # Quality-Souvenirs-Laravel
 
-An e-commerce website developed with PHP Laravel 
+An e-commerce website developed with PHP Laravel
+
+Home Page:
+![homepage](doc/QualitySouvenirs.png)
+
+Product Page:
+![product](doc/QS.png)
 
 # How to
 
