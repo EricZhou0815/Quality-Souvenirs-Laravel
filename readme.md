@@ -27,6 +27,8 @@ Product Page:
 
 - Catalog Administration (manage product, category, supplier, order)
 
+- Payment integration with Stripe (Ongoging)
+
 
 # How to
 
